@@ -14,8 +14,11 @@ ChildModel _$ChildModelFromJson(Map<String, dynamic> json) => ChildModel(
   birthday: DateTime.parse(json['birthday'] as String),
   admissionDate: DateTime.parse(json['admissionDate'] as String),
   communityHallId: json['communityHallId'] as String,
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
+  admissionValidFrom: DateTime.parse(json['admissionValidFrom'] as String),
+  admissionValidUntil: DateTime.parse(json['admissionValidUntil'] as String),
+  graduationDate: DateTime.parse(json['graduationDate'] as String),
+  isCurrentlyAdmitted: json['isCurrentlyAdmitted'] as bool,
+  isGraduated: json['isGraduated'] as bool,
 );
 
 Map<String, dynamic> _$ChildModelToJson(ChildModel instance) =>
@@ -27,6 +30,9 @@ Map<String, dynamic> _$ChildModelToJson(ChildModel instance) =>
       'birthday': instance.birthday.toIso8601String(),
       'admissionDate': instance.admissionDate.toIso8601String(),
       'communityHallId': instance.communityHallId,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'admissionValidFrom': instance.admissionValidFrom.toIso8601String(),
+      'admissionValidUntil': instance.admissionValidUntil.toIso8601String(),
+      'graduationDate': instance.graduationDate.toIso8601String(),
+      'isCurrentlyAdmitted': instance.isCurrentlyAdmitted,
+      'isGraduated': instance.isGraduated,
     };

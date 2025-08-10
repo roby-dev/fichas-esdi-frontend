@@ -1,19 +1,15 @@
+import 'package:fichas_esdi/features/alert_child/data/models/alert_child_model.dart';
+import 'package:fichas_esdi/features/alert_child/domain/entities/bulk_update_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'bulk_update_response_model.g.dart';
 
 @JsonSerializable()
-class BulkUpdateResponseModel {
-  final int updated;
-  final int created;
-  final int errors;
-  final String message;
-
+class BulkUpdateResponseModel extends BulkUpdateResponse {
   const BulkUpdateResponseModel({
-    required this.updated,
-    required this.created,
-    required this.errors,
-    required this.message,
+    required super.ok,
+    required super.message,
+    required List<AlertChildModel> super.data,
   });
 
   factory BulkUpdateResponseModel.fromJson(Map<String, dynamic> json) =>

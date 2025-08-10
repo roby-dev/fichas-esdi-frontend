@@ -12,8 +12,9 @@ CommunityHallModel _$CommunityHallModelFromJson(Map<String, dynamic> json) =>
       localId: json['localId'] as String,
       name: json['name'] as String,
       managementCommitteeId: json['managementCommitteeId'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      managementCommittee: ManagementCommitteeModel.fromJson(
+        json['managementCommittee'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$CommunityHallModelToJson(CommunityHallModel instance) =>
@@ -22,6 +23,5 @@ Map<String, dynamic> _$CommunityHallModelToJson(CommunityHallModel instance) =>
       'localId': instance.localId,
       'name': instance.name,
       'managementCommitteeId': instance.managementCommitteeId,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'managementCommittee': instance.managementCommittee,
     };

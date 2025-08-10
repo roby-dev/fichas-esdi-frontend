@@ -12,8 +12,6 @@ ManagementCommitteeModel _$ManagementCommitteeModelFromJson(
   id: json['id'] as String,
   committeeId: json['committeeId'] as String,
   name: json['name'] as String,
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
 );
 
 Map<String, dynamic> _$ManagementCommitteeModelToJson(
@@ -22,6 +20,4 @@ Map<String, dynamic> _$ManagementCommitteeModelToJson(
   'id': instance.id,
   'committeeId': instance.committeeId,
   'name': instance.name,
-  'createdAt': instance.createdAt.toIso8601String(),
-  'updatedAt': instance.updatedAt.toIso8601String(),
 };

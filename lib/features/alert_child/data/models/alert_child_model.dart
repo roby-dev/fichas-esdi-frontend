@@ -1,35 +1,25 @@
+import 'package:fichas_esdi/features/alert_child/domain/entities/alert_child.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'alert_child_model.g.dart';
 
 @JsonSerializable()
-class AlertChildModel {
-  final String id;
-  final String documentNumber;
-  final String firstName;
-  final String lastName;
-  final DateTime birthday;
-  final DateTime admissionDate;
-  final String communityHallId;
-  final String managementCommitteeId;
-  final List<String> alerts;
-  final String status;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-
+class AlertChildModel extends AlertChild {
   const AlertChildModel({
-    required this.id,
-    required this.documentNumber,
-    required this.firstName,
-    required this.lastName,
-    required this.birthday,
-    required this.admissionDate,
-    required this.communityHallId,
-    required this.managementCommitteeId,
-    required this.alerts,
-    required this.status,
-    required this.createdAt,
-    required this.updatedAt,
+    required super.id,
+    required super.documentNumber,
+    required super.fullName,
+    required super.gender,
+    required super.childCode,
+    required super.admissionDate,
+    required super.birthday,
+    required super.managementCommitteName,
+    required super.communityHallName,
+    required super.managementCommitteCode,
+    required super.communityHallId,
+    required super.ageInMonths,
+    required super.activeAlertSignal,
+    required super.alertSignalSchedule,
   });
 
   factory AlertChildModel.fromJson(Map<String, dynamic> json) =>

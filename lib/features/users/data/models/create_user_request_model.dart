@@ -1,13 +1,18 @@
+import 'package:fichas_esdi/features/users/domain/entities/create_user_request.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'create_user_request_model.g.dart';
 
 @JsonSerializable()
-class CreateUserRequestModel {
-  final String email;
-  final String password;
+class CreateUserRequestModel extends CreateUserRequest {
+  const CreateUserRequestModel({required super.email, required super.password});
 
-  const CreateUserRequestModel({required this.email, required this.password});
+  factory CreateUserRequestModel.fromEntity(CreateUserRequest entity) {
+    return CreateUserRequestModel(
+      email: entity.email,
+      password: entity.password,
+    );
+  }
 
   factory CreateUserRequestModel.fromJson(Map<String, dynamic> json) =>
       _$CreateUserRequestModelFromJson(json);

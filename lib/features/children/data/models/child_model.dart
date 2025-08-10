@@ -1,29 +1,23 @@
+import 'package:fichas_esdi/features/children/domain/entities/child.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'child_model.g.dart';
 
 @JsonSerializable()
-class ChildModel {
-  final String id;
-  final String documentNumber;
-  final String firstName;
-  final String lastName;
-  final DateTime birthday;
-  final DateTime admissionDate;
-  final String communityHallId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-
+class ChildModel extends Child {
   const ChildModel({
-    required this.id,
-    required this.documentNumber,
-    required this.firstName,
-    required this.lastName,
-    required this.birthday,
-    required this.admissionDate,
-    required this.communityHallId,
-    required this.createdAt,
-    required this.updatedAt,
+    required super.id,
+    required super.documentNumber,
+    required super.firstName,
+    required super.lastName,
+    required super.birthday,
+    required super.admissionDate,
+    required super.communityHallId,
+    required super.admissionValidFrom,
+    required super.admissionValidUntil,
+    required super.graduationDate,
+    required super.isCurrentlyAdmitted,
+    required super.isGraduated,
   });
 
   factory ChildModel.fromJson(Map<String, dynamic> json) =>

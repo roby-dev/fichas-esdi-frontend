@@ -1,21 +1,14 @@
+import 'package:fichas_esdi/features/users/domain/entities/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
 
 @JsonSerializable()
-class UserModel {
-  final String id;
-  final String email;
-  final List<String> roles;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-
+class UserModel extends User {
   const UserModel({
-    required this.id,
-    required this.email,
-    required this.roles,
-    required this.createdAt,
-    required this.updatedAt,
+    required super.id,
+    required super.email,
+    required super.roles,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

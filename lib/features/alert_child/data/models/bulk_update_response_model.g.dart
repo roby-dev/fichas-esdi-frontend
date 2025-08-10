@@ -9,17 +9,17 @@ part of 'bulk_update_response_model.dart';
 BulkUpdateResponseModel _$BulkUpdateResponseModelFromJson(
   Map<String, dynamic> json,
 ) => BulkUpdateResponseModel(
-  updated: (json['updated'] as num).toInt(),
-  created: (json['created'] as num).toInt(),
-  errors: (json['errors'] as num).toInt(),
+  ok: json['ok'] as bool,
   message: json['message'] as String,
+  data: (json['data'] as List<dynamic>)
+      .map((e) => AlertChildModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$BulkUpdateResponseModelToJson(
   BulkUpdateResponseModel instance,
 ) => <String, dynamic>{
-  'updated': instance.updated,
-  'created': instance.created,
-  'errors': instance.errors,
+  'ok': instance.ok,
   'message': instance.message,
+  'data': instance.data,
 };
