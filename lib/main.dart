@@ -7,11 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Cargar variables de entorno
   await dotenv.load(fileName: ".env");
-
-  // Obtener SharedPreferences
   final sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(
@@ -32,6 +28,7 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Fichas ESDI',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

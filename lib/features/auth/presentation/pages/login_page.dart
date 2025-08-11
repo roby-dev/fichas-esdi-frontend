@@ -29,8 +29,9 @@ class LoginPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Iniciar Sesión'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        toolbarHeight: 0,
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
       ),
       body: const Padding(padding: EdgeInsets.all(16.0), child: LoginForm()),
     );
