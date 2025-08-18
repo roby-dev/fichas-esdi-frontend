@@ -6,4 +6,5 @@ import 'package:fichas_esdi/features/children/domain/entities/create_child_reque
 abstract class ChildrenRepository {
   Future<Either<Failure, Child>> createChild(CreateChildRequest request);
   Future<Either<Failure, List<Child>>> getChildren();
+  Future<Either<Failure, Child>> getChildById(String id);
 }

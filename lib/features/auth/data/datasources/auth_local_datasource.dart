@@ -1,5 +1,6 @@
 import 'package:fichas_esdi/core/constants/app_constants.dart';
 import 'package:fichas_esdi/core/errors/exceptions.dart';
+import 'package:fichas_esdi/core/session/user_session_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthLocalDataSource {
@@ -11,12 +12,17 @@ abstract class AuthLocalDataSource {
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final SharedPreferences sharedPreferences;
+  final UserSessionNotifier userSessionNotifier;
 
-  const AuthLocalDataSourceImpl(this.sharedPreferences);
+  const AuthLocalDataSourceImpl(
+    this.sharedPreferences,
+    this.userSessionNotifier,
+  );
 
   @override
   Future<void> saveTokens(String accessToken, String refreshToken) async {
     try {
+      userSessionNotifier.setSession(accessToken);
       await Future.wait([
         sharedPreferences.setString(AppConstants.accessTokenKey, accessToken),
         sharedPreferences.setString(AppConstants.refreshTokenKey, refreshToken),

@@ -5,6 +5,7 @@ import 'package:fichas_esdi/features/children/data/models/create_child_request_m
 abstract class ChildrenRemoteDataSource {
   Future<ChildModel> createChild(CreateChildRequestModel request);
   Future<List<ChildModel>> getChildren();
+  Future<ChildModel> getChildById(String id);
 }
 
 class ChildrenRemoteDataSourceImpl implements ChildrenRemoteDataSource {
@@ -26,5 +27,11 @@ class ChildrenRemoteDataSourceImpl implements ChildrenRemoteDataSource {
     final response = await apiClient.get('/api/v1/children');
     final List<dynamic> data = response.data;
     return data.map((json) => ChildModel.fromJson(json)).toList();
+  }
+
+  @override
+  Future<ChildModel> getChildById(String id) async {
+    final response = await apiClient.get('/api/v1/children/$id');
+    return ChildModel.fromJson(response.data);
   }
 }

@@ -1,7 +1,8 @@
-import 'package:fichas_esdi/features/auth/presentation/providers/auth_providers.dart';
+import 'package:fichas_esdi/core/session/user_session_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppbar({super.key});
@@ -14,28 +15,43 @@ class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
     EdgeInsets safeAreaPading = MediaQuery.of(context).padding;
 
     return AppBar(
+      iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.light,
       ),
       flexibleSpace: Container(
-        padding: EdgeInsets.only(top: safeAreaPading.top, left: 24, right: 24),
         height: preferredSize.height + safeAreaPading.top,
-        color: Theme.of(context).colorScheme.inversePrimary,
+        color: Colors.white,
         alignment: Alignment.center,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(Icons.home, size: 20, color: Colors.white),
+            SizedBox(width: 50),
+            Consumer(
+              builder: (context, ref, child) {
+                return Text(
+                  ref.watch(userSessionProvider).committeeName ??
+                      'No Seleccionado',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                );
+              },
+            ),
+            Spacer(),
             Row(
               children: [
                 Consumer(
                   builder: (context, ref, child) {
                     return IconButton(
                       onPressed: () {
-                        ref.read(authProvider.notifier).logout();
+                        context.push('/committees');
                       },
-                      icon: const Icon(Icons.logout, color: Colors.white),
+                      icon: Icon(
+                        Icons.settings,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     );
                   },
                 ),

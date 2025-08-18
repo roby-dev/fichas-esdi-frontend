@@ -1,4 +1,5 @@
 import 'package:fichas_esdi/core/providers/core_providers.dart';
+import 'package:fichas_esdi/core/session/user_session_provider.dart';
 import 'package:fichas_esdi/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:fichas_esdi/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:fichas_esdi/features/auth/data/repositories/auth_repository_impl.dart';
@@ -9,7 +10,10 @@ import 'package:fichas_esdi/features/auth/domain/usecases/login_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final authLocalDataSourceProvider = Provider<AuthLocalDataSource>((ref) {
-  return AuthLocalDataSourceImpl(ref.watch(sharedPreferencesProvider));
+  return AuthLocalDataSourceImpl(
+    ref.watch(sharedPreferencesProvider),
+    ref.watch(userSessionProvider.notifier),
+  );
 });
 
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
@@ -58,11 +62,15 @@ class AuthState {
 
 // Notifier para manejar el estado de autenticación
 class AuthNotifier extends StateNotifier<AuthState> {
+  final UserSessionNotifier _userSessionNotifier;
   final LoginUseCase _loginUseCase;
   final AuthRepository _authRepository;
 
-  AuthNotifier(this._loginUseCase, this._authRepository)
-    : super(const AuthState()) {
+  AuthNotifier(
+    this._userSessionNotifier,
+    this._loginUseCase,
+    this._authRepository,
+  ) : super(const AuthState()) {
     _checkAuthStatus();
   }
 
@@ -113,6 +121,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
           isAuthenticated: false,
           loginResponse: null,
         );
+        _userSessionNotifier.clearSession();
       },
     );
   }
@@ -120,6 +129,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   return AuthNotifier(
+    ref.read(userSessionProvider.notifier),
     ref.watch(loginUseCaseProvider),
     ref.watch(authRepositoryProvider),
   );

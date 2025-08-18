@@ -1,3 +1,4 @@
+import 'package:fichas_esdi/features/shared/drawers/widgets/my_drawer.dart';
 import 'package:fichas_esdi/features/shared/layouts/widgets/my_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +23,7 @@ class Layout1State extends ConsumerState<Layout1> {
         ),
       ),
       appBar: const MyAppbar(),
+      drawer: const MyDrawer(),
     );
   }
 }
